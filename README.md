@@ -32,6 +32,11 @@
     
     $ curl -H "Authorization: Bearer $TOKEN" localhost:9000
     
+    
+# UI 서버 작성
+
+    http://localhost:8080/
+    
 
 # Reference
 
