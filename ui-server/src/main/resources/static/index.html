@@ -2,15 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+
     <title>로그인</title>
 </head>
 <body>
 
     <ul>
-        <li><a href="uaa/login">로그인(error)</a></li>
-        <li><a href="uaa/logout">로그아웃(error)</a></li>
+        <li><a href="login">로그인(error)</a></li>
+        <li><a href="javascript:;" onclick="logout();">로그아웃(error)</a></li>
+        <li><a href="user/tokens">토큰목록</a></li>
         <li><a href="resource">리소스</a></li>
     </ul>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    var SERVER_URL = 'http://localhost:8080';
+    var token = null;
+
+    $(function() {
+        $.ajax({
+            url: SERVER_URL + '/user',
+            success: function(data, status, xhr) {
+                if (status === 'success') {
+                    token = data.details.tokenValue;
+                }
+
+                console.log('token : ' + token);
+
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.status);
+                // 401일 경우는 권한이 없는거
+            }
+        });
+
+    });
+
+    function logout() {
+        console.log('로그아웃합니다.');
+        console.log(getCookie('JSESSIONID'));
+
+        if (token !== null) {
+            $.ajax({
+                type: 'POST',
+                url: SERVER_URL + '/user/tokens/revoke/' + this.token,
+                beforeSend: function(request)  {
+                    request.setRequestHeader('Authorization', 'Bearer ' + token);
+                    // 호출시에 xsrf token 반드시 넣어줄것
+                    request.setRequestHeader('X-XSRF-TOKEN', getCookie('XSRF-TOKEN'));
+                },
+                success: function(data, status) {
+
+                    // 로그아웃 후에 모든 cache 삭제
+                    console.log(getCookie('JSESSIONID'));
+
+                    //                    location.href  = '/'
+                }
+            });
+        }
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+</script>
 </html>

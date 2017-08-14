@@ -36,6 +36,10 @@
 # UI 서버 작성
 
     http://localhost:8080/
+
+# TODO
+
+    logout 후 login 시 401 오류 발생
     
 
 # Reference

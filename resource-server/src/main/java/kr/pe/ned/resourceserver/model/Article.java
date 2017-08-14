@@ -15,6 +15,12 @@ public class Article {
      */
     private String content;
 
+    public Article(Long id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
     public Long getId() {
         return id;
     }

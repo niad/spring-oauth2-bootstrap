@@ -13,7 +13,6 @@ zuul:
       url: http://localhost:9999/uaa/user
 
 
-
 security:
   oauth2:
     client:
@@ -24,6 +23,9 @@ security:
     resource:
       user-info-uri: http://localhost:9999/uaa/user
 
-
+spring:
+  devtools:
+    livereload:
+      enabled: true
 
 
