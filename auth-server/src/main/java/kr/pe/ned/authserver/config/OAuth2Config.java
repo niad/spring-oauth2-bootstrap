@@ -37,8 +37,8 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .withClient("acme")
                 .secret("acmesecret")
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("openid");
-//                .autoApprove(true);   // Scope에 대한 승인 없이 바로 로그인 됨
+                .scopes("openid")
+                .autoApprove(true);   // Scope에 대한 승인 없이 바로 로그인 됨
 
                 //로그인 시 scope 설정이 반드시 필요함.
     }
