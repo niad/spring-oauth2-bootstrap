@@ -50,37 +50,27 @@
         if (token !== null) {
             $.ajax({
                 type: 'POST',
-                url: SERVER_URL + '/user/tokens/revoke/' + this.token,
+                url: SERVER_URL + '/logout' + this.token,
                 beforeSend: function(request)  {
                     request.setRequestHeader('Authorization', 'Bearer ' + token);
                     // 호출시에 xsrf token 반드시 넣어줄것
                     request.setRequestHeader('X-XSRF-TOKEN', getCookie('XSRF-TOKEN'));
                 },
                 success: function(data, status) {
-
-                    // 로그아웃 후에 모든 cache 삭제
-                    console.log(getCookie('JSESSIONID'));
-
                     //                    location.href  = '/'
                 }
             });
         }
     }
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
+
+    function deleteCookie( cookieName )
+    {
+        var expireDate = new Date();
+
+        //어제 날짜를 쿠키 소멸 날짜로 설정한다.
+        expireDate.setDate( expireDate.getDate() - 1 );
+        document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString() + "; path=/";
     }
 
 </script>

@@ -1,39 +1,42 @@
 package kr.pe.ned.apigateway.config;
 
+import com.netflix.ribbon.proxy.annotation.Http;
+import kr.pe.ned.apigateway.filter.ApiTokenAccessFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private ResourceServerTokenServices tokenServices;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    public void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
         http
-//            .authorizeRequests()
-//                .antMatchers("/oauth/authorize", "/oauth/token").permitAll()
-//            .anyRequest()
-//                .authenticated()
-//            .and()
                 .csrf().disable()
-//                .and()
-//                .formLogin().permitAll()
-                ;
+                .authorizeRequests()
+                .antMatchers("/index.html", "/home.html", "/", "/login").permitAll()
+                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST).authenticated()
+                .and()
+                .logout()
+                .and()
+                .addFilterBefore(new ApiTokenAccessFilter(tokenServices), AbstractPreAuthenticatedProcessingFilter.class);
+        // @formatter:on
     }
 
-    @Bean
-    protected OAuth2RestTemplate OAuth2RestTemplate(OAuth2ProtectedResourceDetails resource, OAuth2ClientContext context) {
-        return new OAuth2RestTemplate(resource, context);
-    }
+
+//    @Bean
+//    protected OAuth2RestTemplate OAuth2RestTemplate(OAuth2ProtectedResourceDetails resource, OAuth2ClientContext context) {
+//        return new OAuth2RestTemplate(resource, context);
+//    }
+
 }
