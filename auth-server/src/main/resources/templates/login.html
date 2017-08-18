@@ -1,25 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
-    <title>Login Page</title></head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" />
+
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .input-field input[type=date]:focus + label,
+        .input-field input[type=text]:focus + label,
+        .input-field input[type=email]:focus + label,
+        .input-field input[type=password]:focus + label {
+            color: #e91e63;
+        }
+
+        .input-field input[type=date]:focus,
+        .input-field input[type=text]:focus,
+        .input-field input[type=email]:focus,
+        .input-field input[type=password]:focus {
+            border-bottom: 2px solid #e91e63;
+            box-shadow: none;
+        }
+
+        .login-form-wrapper {
+            display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;
+        }
+    </style>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+    <title>DR Corp - Stock</title>
+</head>
 <body>
-<h3>로그인</h3>
-<form th:action="@{/login}" method="POST">
-    <table>
-        <tr>
-            <td>아이디:</td>
-            <td><input type="text" name="username" value=""/></td>
-        </tr>
-        <tr>
-            <td>패스워드:</td>
-            <td><input type="password" name="password"/></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input name="submit" type="submit" value="Login"/></td>
-        </tr>
-    </table>
-</form>
+<main>
+    <div class="center-align">
+        <h5 class="black-text">로그인</h5>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row login-form-wrapper" >
+                <form name="loginForm" th:action="@{/login}" method="post" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" type="text" name="username" />
+                            <label for="username">아이디를 입력하세요</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" name="password"/>
+                            <label for="password">패스워드를 입력하세요</label>
+                        </div>
+                        <label style="float: right;">
+                            <a class="pink-text" href="#"><b>패스워드 찾기</b></a>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <button type="submit" name='btn_login' class='col s12 btn btn-large waves-effect black'>Login</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>

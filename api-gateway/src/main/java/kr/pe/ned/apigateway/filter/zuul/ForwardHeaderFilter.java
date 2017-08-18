@@ -1,4 +1,4 @@
-package kr.pe.ned.apigateway.filter;
+package kr.pe.ned.apigateway.filter.zuul;
 
 
 import com.netflix.zuul.ZuulFilter;

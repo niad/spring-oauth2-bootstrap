@@ -116,9 +116,20 @@ POST http://localhost:9999/oauth/token
 
 
 
-## TODO
-Zuul + OAuth2 - REST API Server
+# 애플리케이션 조합
 
+## Zuul + OAuth2 + React
+    webclient : React  
+    api-server : OAuth2 Resource Server
+    resource-server : OAuth2 Resource Server
+    auth-server : OAuth2 Authorization Server
+
+    
+## Zuul + OAuth2 + Angular
+    ui-server : html + angular + OAuth2 SSO 
+    resource-server : OAuth2 Resource Server
+    auth-server : OAuth2 Authorization Server
+    
 
 
 

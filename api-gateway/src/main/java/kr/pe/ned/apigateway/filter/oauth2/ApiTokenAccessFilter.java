@@ -1,4 +1,4 @@
-package kr.pe.ned.apigateway.filter;
+package kr.pe.ned.apigateway.filter.oauth2;
 
 
 import org.springframework.security.authentication.AuthenticationManager;

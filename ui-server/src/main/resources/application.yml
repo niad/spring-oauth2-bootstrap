@@ -22,6 +22,8 @@ security:
       client-secret: acmesecret
     resource:
       user-info-uri: http://localhost:9999/uaa/user
+  user:
+    password: none
 
 spring:
   devtools:
