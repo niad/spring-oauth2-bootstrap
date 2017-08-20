@@ -134,6 +134,17 @@ POST http://localhost:9999/oauth/token
 
 
 
+# OAuth2 Token Store
+
+## JDBC Token Store
+[DB Scheme](https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql)
+
+
+
+
+
+
+
 # Reference
 
 [위 예제의 원본](https://github.com/spring-guides/tut-spring-security-and-angular-js/tree/master/oauth2-vanilla)
@@ -146,4 +157,16 @@ Authorization grant types
 - Client credentials : application access
 - Implicit
 
-[SpringBoot OAuth2 Zuul React](https://github.com/SasPes/JavaSkop2017)
+*[SpringBoot OAuth2 Zuul React](https://github.com/SasPes/JavaSkop2017)
+
+
+[Zuul Example](https://exampledriven.wordpress.com/2016/07/06/spring-cloud-zuul-example/)
+
+[Spring OAuth2 return 401, not 403](https://stackoverflow.com/questions/42320756/oauth2-with-spring-boot-rest-application-cannot-access-resource-with-token)
+Token 없을때 403이 뜨는 문제 springboot 1.5에서 필터순서가 바뀐듯.. 
+
+
+[Spring OAuth2 Token Store - JDBC](https://brunch.co.kr/@sbcoba/5)
+
+
+[Spring OAuth2](http://kimseunghyun76.tistory.com/403)
