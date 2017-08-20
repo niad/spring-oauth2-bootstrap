@@ -23,7 +23,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findOneByLoginId(username);
-        log.info("user : {}", user);
         if (user == null) {
             log.error("not found loginId : {}", username);
             throw new UsernameNotFoundException(String.format("User %s does not exist!", username));
